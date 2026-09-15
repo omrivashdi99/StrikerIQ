@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Striker IQ — Attacking Decision Training</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===================== HEADER / NAVIGATION ===================== -->
+  <header class="site-header">
+    <div class="nav-wrap">
+      <div class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-text">Striker<span class="accent">IQ</span></span>
+      </div>
+
+      <nav class="main-nav" id="mainNav">
+        <button class="nav-link active" data-target="home">Home</button>
+        <button class="nav-link" data-target="training">Training</button>
+        <button class="nav-link" data-target="library">Drill Library</button>
+        <button class="nav-link" data-target="development">Development</button>
+        <button class="nav-link" data-target="about">About</button>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== HOME SECTION ===================== -->
+    <section id="home" class="page active-page">
+
+      <div class="hero">
+        <div class="hero-text">
+          <p class="eyebrow">Decision Training for Attackers</p>
+          <h1>Great strikers aren't just fast.<br>They decide <span class="accent">faster.</span></h1>
+          <p class="hero-sub">
+            Striker IQ puts you inside real attacking moments — 1v1s, counterattacks, crosses,
+            through balls — and trains the split-second decisions that separate good wingers
+            and strikers from great ones.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-target="training">Start Training</button>
+            <button class="btn btn-ghost" data-target="library">Browse Drills</button>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="pitch">
+            <div class="pitch-circle"></div>
+            <div class="pitch-line"></div>
+            <div class="ball">
+              <div class="ball-pentagon p1"></div>
+              <div class="ball-pentagon p2"></div>
+              <div class="ball-pentagon p3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="how-it-works">
+        <h2>How the training works</h2>
+        <div class="steps">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <h3>Face a real scenario</h3>
+            <p>You're dropped into a live attacking situation — the ball, the defender, the run, the space. No trivia, just game moments.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <h3>Make the call</h3>
+            <p>Choose from several realistic options, exactly as you would on the pitch, under the same kind of time pressure.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <h3>Learn the why</h3>
+            <p>See whether it was the highest-percentage decision, and get the tactical reasoning behind the right read.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <h3>Track your score</h3>
+            <p>Watch your decision score and accuracy build across the session, then get a full results breakdown at the end.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-band">
+        <h2>Train your soccer brain, not just your legs.</h2>
+        <button class="btn btn-primary btn-large" data-target="training">Start Training Now</button>
+      </section>
+
+    </section>
+
+    <!-- ===================== TRAINING SECTION ===================== -->
+    <section id="training" class="page">
+      <div class="section-heading">
+        <p class="eyebrow">Decision Training</p>
+        <h1>Attacking Scenarios</h1>
+        <p class="section-sub">Read every situation like it's really happening. There's no rewind on the pitch.</p>
+      </div>
+
+      <!-- Intro / start screen -->
+      <div id="trainingIntro" class="training-intro">
+        <div class="intro-card">
+          <h2>Ready to test your decision-making?</h2>
+          <p>
+            You'll face a series of attacking scenarios as a winger or striker. For each one, pick
+            the option you'd actually choose in the moment. You'll get instant feedback and a final
+            score at the end of the session.
+          </p>
+          <ul class="intro-list">
+            <li>Multiple realistic scenarios per session</li>
+            <li>Instant explanation after every decision</li>
+            <li>Live score, accuracy, and progress tracking</li>
+          </ul>
+          <button class="btn btn-primary btn-large" id="beginTrainingBtn">Begin Session</button>
+        </div>
+      </div>
+
+      <!-- Active scenario screen -->
+      <div id="trainingActive" class="training-active hidden">
+
+        <div class="training-hud">
+          <div class="hud-item">
+            <span class="hud-label">Scenario</span>
+            <span class="hud-value" id="progressLabel">1 / 8</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">Score</span>
+            <span class="hud-value" id="scoreLabel">0</span>
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <p class="scenario-tag" id="scenarioTag">1v1 Attacking</p>
+          <p class="scenario-text" id="scenarioText">Loading scenario...</p>
+
+          <div class="choices" id="choicesWrap">
+            <!-- choice buttons injected by JS -->
+          </div>
+
+          <div class="feedback hidden" id="feedbackBox">
+            <p class="feedback-verdict" id="feedbackVerdict"></p>
+            <p class="feedback-explain" id="feedbackExplain"></p>
+            <div class="feedback-reasoning">
+              <p class="reasoning-label">Tactical Reasoning</p>
+              <p id="feedbackReasoning"></p>
+            </div>
+            <button class="btn btn-primary" id="nextScenarioBtn">Next Scenario</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results screen -->
+      <div id="trainingResults" class="training-results hidden">
+        <div class="results-card">
+          <p class="eyebrow">Session Complete</p>
+          <h2>Striker IQ Result</h2>
+
+          <div class="results-grid">
+            <div class="result-stat">
+              <span class="result-value" id="resultScore">0/8</span>
+              <span class="result-label">Decision Score</span>
+            </div>
+            <div class="result-stat">
+              <span class="result-value" id="resultAccuracy">0%</span>
+              <span class="result-label">Accuracy</span>
+            </div>
+            <div class="result-stat">
+              <span class="result-value" id="resultCorrect">0</span>
+              <span class="result-label">Best Decisions</span>
+            </div>
+          </div>
+
+          <p class="results-feedback" id="resultsFeedback"></p>
+
+          <div class="results-actions">
+            <button class="btn btn-primary" id="restartTrainingBtn">Train Again</button>
+            <button class="btn btn-ghost" data-target="library">Go to Drill Library</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TRAINING LIBRARY SECTION ===================== -->
+    <section id="library" class="page">
+      <div class="section-heading">
+        <p class="eyebrow">Drill Library</p>
+        <h1>Training Library</h1>
+        <p class="section-sub">Practical drills for wingers and strikers, organized by the skill they build.</p>
+      </div>
+
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-filter="All">All</button>
+        <button class="filter-btn" data-filter="Finishing">Finishing</button>
+        <button class="filter-btn" data-filter="1v1">1v1</button>
+        <button class="filter-btn" data-filter="Speed & Explosiveness">Speed &amp; Explosiveness</button>
+        <button class="filter-btn" data-filter="First Touch">First Touch</button>
+        <button class="filter-btn" data-filter="Decision Making">Decision Making</button>
+      </div>
+
+      <div class="drills-grid" id="drillsGrid">
+        <!-- drill cards injected by JS -->
+      </div>
+    </section>
+
+    <!-- ===================== PLAYER DEVELOPMENT SECTION ===================== -->
+    <section id="development" class="page">
+      <div class="section-heading">
+        <p class="eyebrow">Player Development</p>
+        <h1>The Attacking Toolkit</h1>
+        <p class="section-sub">The skills behind every good attacking decision, on and off the ball.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon icon-scan" aria-hidden="true"></div>
+          <h3>Scanning</h3>
+          <p>Checking your surroundings before the ball arrives so you already know your options the moment you receive it.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon icon-touch" aria-hidden="true"></div>
+          <h3>First Touch</h3>
+          <p>Your first touch sets up everything after it — a good one buys time, space, and options; a bad one gives them away.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon icon-body" aria-hidden="true"></div>
+          <h3>Body Orientation</h3>
+          <p>Facing your body toward the field, not the ball, so you can play forward, turn, or shield without wasted movement.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon icon-timing" aria-hidden="true"></div>
+          <h3>Timing of Runs</h3>
+          <p>Arriving in space a half-second after the defense expects you to, not before — timing beats raw speed.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon icon-oneone" aria-hidden="true"></div>
+          <h3>1v1 Decision-Making</h3>
+          <p>Reading what a defender is inviting you to do, then choosing the option they're least prepared for.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon icon-finish" aria-hidden="true"></div>
+          <h3>Finishing</h3>
+          <p>Picking the target the goalkeeper is least likely to reach, and committing to the strike without hesitation.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon icon-space" aria-hidden="true"></div>
+          <h3>Creating Space</h3>
+          <p>Moving to lose your marker just before the ball arrives — a change of pace or direction, not standing still.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ABOUT SECTION ===================== -->
+    <section id="about" class="page">
+      <div class="section-heading">
+        <p class="eyebrow">About</p>
+        <h1>About Striker IQ</h1>
+      </div>
+
+      <div class="about-content">
+        <p>
+          Striker IQ is an educational concept built to help attacking soccer players — wingers
+          and strikers in particular — practice the decision-making side of the game, not just
+          the physical side. Technical ability and fitness matter, but games are also won and
+          lost in the half-second choices players make with the ball: when to pass, when to
+          dribble, when to shoot, and when to hold.
+        </p>
+        <p>
+          This site presents realistic attacking scenarios and common tactical principles so
+          players can think through those moments away from the pressure of a live match, and
+          build better instincts for when it counts.
+        </p>
+        <p class="about-disclaimer">
+          Striker IQ is an educational training concept created for a class project. It is not a
+          scientifically validated tool and is not affiliated with, endorsed by, or reviewed by
+          any professional soccer club, coaching body, or sports science organization. It is
+          intended purely as a decision-making learning aid.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Striker IQ — an original decision-training concept for attacking soccer players.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
